@@ -1,22 +1,20 @@
-import { Heart } from "lucide-react";
-
 function Footer() {
   return (
-    <footer className="border-t border-zinc-800 bg-zinc-950 py-10">
-      <div className="mx-auto max-w-7xl px-6 text-center">
-        <a href="/" className="text-2xl font-bold tracking-tight">
-          <span className="text-white">Seva</span>
-          <span className="text-blue-500">.</span>
+    <footer className="border-t border-border py-12">
+      <div className="mx-auto max-w-6xl px-6 text-center">
+        <a href="/" className="font-serif text-2xl font-medium tracking-wide">
+          <span className="text-text">Seva</span>
+          <span className="text-primary">.</span>
         </a>
 
-        <p className="mt-3 text-sm text-zinc-400">
+        <p className="mt-3 text-sm text-muted">
           Crafting modern web experiences.
         </p>
 
-        <div className="mt-6 flex items-center justify-center gap-1 text-sm text-zinc-500">
+        <div className="mt-8 flex items-center justify-center gap-2 text-sm text-muted/70">
           <span>&copy; 2026 Seva.</span>
-          <span>Made with Fauzan Seva Nugraha</span>
-          <Heart size={14} className="text-red-500" />
+          <span>&middot;</span>
+          <span>Fauzan Seva Nugraha</span>
         </div>
       </div>
     </footer>

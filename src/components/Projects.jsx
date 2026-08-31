@@ -1,40 +1,38 @@
 import { motion } from "framer-motion";
-import { ExternalLink } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
 import projects from "../data/projects";
-import { GitHubIcon } from "./Icons";
 
 function Projects() {
   return (
-    <section id="projects" className="relative py-28">
-      <div className="mx-auto max-w-7xl px-6">
+    <section id="projects" className="py-28">
+      <div className="mx-auto max-w-6xl px-6">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6 }}
         >
-          <p className="mb-3 text-sm font-medium uppercase tracking-wider text-blue-400">
+          <p className="mb-4 uppercase tracking-[0.25em] text-primary text-sm">
             Projects
           </p>
-          <h2 className="mb-12 text-4xl font-bold text-white md:text-5xl">
+          <h2 className="mb-14 font-serif text-4xl font-medium text-text md:text-5xl">
             My Projects
           </h2>
         </motion.div>
 
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
           {projects.map((project, i) => (
             <motion.div
               key={project.id}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              whileHover={{ y: -6 }}
-              className="group flex flex-col overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/50 transition-colors hover:border-blue-500/50"
+              transition={{ duration: 0.5, delay: i * 0.08 }}
+              className="group flex flex-col border border-border p-6 transition-colors hover:border-primary/60"
             >
-              <div className="aspect-video bg-zinc-800/50">
+              <div className="mb-6 flex aspect-video items-center justify-center bg-card/40">
                 {project.image ? (
                   <img
                     src={project.image}
@@ -43,62 +41,38 @@ function Projects() {
                     className="h-full w-full object-cover"
                   />
                 ) : (
-                  <div className="flex h-full items-center justify-center text-zinc-600">
-                    <span className="text-4xl font-bold">{project.title[0]}</span>
-                  </div>
+                  <span className="font-serif text-4xl font-medium text-muted">
+                    {project.title[0]}
+                  </span>
                 )}
               </div>
 
-              <div className="flex flex-1 flex-col p-5">
-                <h3 className="mb-2 text-lg font-semibold text-white">
-                  {project.title}
-                </h3>
-                <p className="mb-4 flex-1 text-sm leading-relaxed text-zinc-400">
-                  {project.description}
-                </p>
+              <h3 className="mb-3 font-serif text-2xl font-medium text-text transition-colors group-hover:text-primary">
+                {project.title}
+              </h3>
 
-                <div className="mb-4 flex flex-wrap gap-2">
-                  {project.tech.map((t) => (
-                    <span
-                      key={t}
-                      className="rounded-md bg-blue-500/10 px-2.5 py-1 text-xs font-medium text-blue-400"
-                    >
-                      {t}
-                    </span>
-                  ))}
-                </div>
+              <p className="mb-6 flex-1 text-sm leading-relaxed text-muted">
+                {project.description}
+              </p>
 
-                <div className="flex gap-3">
-                  <Link
-                    to={`/project/${project.id}`}
-                    className="flex items-center gap-1.5 rounded-lg border border-zinc-700 px-4 py-2 text-sm text-zinc-300 transition-colors hover:border-blue-500 hover:text-white"
-                  >
-                    Detail
-                  </Link>
-                  {project.github && (
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-1.5 rounded-lg px-4 py-2 text-sm text-zinc-300 transition-colors hover:text-white"
-                    >
-                      <GitHubIcon size={16} />
-                      GitHub
-                    </a>
-                  )}
-                  {project.demo && (
-                    <a
-                      href={project.demo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-1.5 rounded-lg px-4 py-2 text-sm text-zinc-300 transition-colors hover:text-white"
-                    >
-                      <ExternalLink size={16} />
-                      Demo
-                    </a>
-                  )}
-                </div>
+              <div className="mb-6 flex flex-wrap gap-x-3 gap-y-1.5">
+                {project.tech.map((t) => (
+                  <span key={t} className="text-xs uppercase tracking-wider text-primary/80">
+                    {t}
+                  </span>
+                ))}
               </div>
+
+              <Link
+                to={`/project/${project.id}`}
+                className="inline-flex items-center gap-1.5 border-t border-border pt-4 text-sm text-text transition-colors hover:text-primary"
+              >
+                View Project
+                <ArrowUpRight
+                  size={16}
+                  className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                />
+              </Link>
             </motion.div>
           ))}
         </div>

@@ -1,13 +1,12 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Send, Mail, MessageCircle } from "lucide-react";
+import { MessageCircle } from "lucide-react";
 
 import { GitHubIcon, InstagramIcon } from "./Icons";
 
 function Contact() {
   const [formData, setFormData] = useState({
     name: "",
-    email: "",
     message: "",
   });
 
@@ -17,16 +16,20 @@ function Contact() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { name, email, message } = formData;
+    const { name, message } = formData;
     const waNumber = "6289526772479";
-    const text = encodeURIComponent(
-      `Halo, saya ${name} (${email}).\n\n${message}`
-    );
+    const text = encodeURIComponent(`Halo, saya ${name}.\n\n${message}`);
     window.open(`https://wa.me/${waNumber}?text=${text}`, "_blank");
-    setFormData({ name: "", email: "", message: "" });
+    setFormData({ name: "", message: "" });
   };
 
   const socials = [
+    {
+      icon: MessageCircle,
+      label: "WhatsApp",
+      href: "https://wa.me/6289526772479",
+      display: "+62 895-2677-2479",
+    },
     {
       icon: GitHubIcon,
       label: "GitHub",
@@ -39,48 +42,36 @@ function Contact() {
       href: "https://instagram.com/sevachronicle",
       display: "@sevachronicle",
     },
-    {
-      icon: Mail,
-      label: "Email",
-      href: "mailto:fauzanseva1@gmail.com",
-      display: "fauzanseva1@gmail.com",
-    },
-    {
-      icon: MessageCircle,
-      label: "WhatsApp",
-      href: "https://wa.me/6289526772479",
-      display: "+62 895-2677-2479",
-    },
   ];
 
   return (
-    <section id="contact" className="relative py-28">
-      <div className="mx-auto max-w-7xl px-6">
+    <section id="contact" className="py-28">
+      <div className="mx-auto max-w-6xl px-6">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6 }}
         >
-          <p className="mb-3 text-sm font-medium uppercase tracking-wider text-blue-400">
+          <p className="mb-4 uppercase tracking-[0.25em] text-primary text-sm">
             Contact
           </p>
-          <h2 className="mb-12 text-4xl font-bold text-white md:text-5xl">
+          <h2 className="mb-14 font-serif text-4xl font-medium text-text md:text-5xl">
             Get In Touch
           </h2>
         </motion.div>
 
-        <div className="grid gap-12 md:grid-cols-2">
+        <div className="grid gap-16 md:grid-cols-2">
           <motion.form
             onSubmit={handleSubmit}
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="space-y-5"
+            className="space-y-6"
           >
             <div>
-              <label htmlFor="name" className="mb-1.5 block text-sm text-zinc-400">
+              <label htmlFor="name" className="mb-1.5 block text-sm text-muted">
                 Name
               </label>
               <input
@@ -90,27 +81,12 @@ function Contact() {
                 required
                 value={formData.name}
                 onChange={handleChange}
-                className="w-full rounded-xl border border-zinc-700 bg-zinc-800/50 px-4 py-3 text-white placeholder-zinc-500 outline-none transition-colors focus:border-blue-500"
+                className="w-full border-b border-border bg-transparent px-2 py-3 text-text placeholder-muted/60 outline-none transition-colors focus:border-primary"
                 placeholder="Your name"
               />
             </div>
             <div>
-              <label htmlFor="email" className="mb-1.5 block text-sm text-zinc-400">
-                Email
-              </label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                required
-                value={formData.email}
-                onChange={handleChange}
-                className="w-full rounded-xl border border-zinc-700 bg-zinc-800/50 px-4 py-3 text-white placeholder-zinc-500 outline-none transition-colors focus:border-blue-500"
-                placeholder="your@email.com"
-              />
-            </div>
-            <div>
-              <label htmlFor="message" className="mb-1.5 block text-sm text-zinc-400">
+              <label htmlFor="message" className="mb-1.5 block text-sm text-muted">
                 Message
               </label>
               <textarea
@@ -120,25 +96,24 @@ function Contact() {
                 rows={5}
                 value={formData.message}
                 onChange={handleChange}
-                className="w-full resize-none rounded-xl border border-zinc-700 bg-zinc-800/50 px-4 py-3 text-white placeholder-zinc-500 outline-none transition-colors focus:border-blue-500"
+                className="w-full resize-none border-b border-border bg-transparent px-2 py-3 text-text placeholder-muted/60 outline-none transition-colors focus:border-primary"
                 placeholder="Your message..."
               />
             </div>
             <button
               type="submit"
-              className="flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-3 font-semibold transition hover:bg-blue-700"
+              className="flex items-center gap-2 rounded border border-primary px-6 py-2.5 text-sm font-medium text-primary transition-colors hover:bg-primary hover:text-background"
             >
               Send Message
-              <Send size={18} />
             </button>
           </motion.form>
 
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="flex flex-col justify-center gap-4"
+            className="flex flex-col justify-center gap-6"
           >
             {socials.map((s) => (
               <a
@@ -146,12 +121,15 @@ function Contact() {
                 href={s.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-4 rounded-xl border border-zinc-800 bg-zinc-900/50 p-4 transition-colors hover:border-blue-500/50"
+                className="group flex items-center gap-4 border-b border-border pb-4 transition-colors hover:border-primary/60"
               >
-                <s.icon size={20} className="text-blue-500" />
+                <s.icon
+                  size={20}
+                  className="text-muted transition-colors group-hover:text-primary"
+                />
                 <div>
-                  <p className="font-medium text-white">{s.label}</p>
-                  <p className="text-sm text-zinc-400">{s.display}</p>
+                  <p className="text-sm font-medium text-text">{s.label}</p>
+                  <p className="text-sm text-muted">{s.display}</p>
                 </div>
               </a>
             ))}

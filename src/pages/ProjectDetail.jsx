@@ -1,6 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowLeft, ExternalLink } from "lucide-react";
+import { ArrowLeft, ArrowUpRight } from "lucide-react";
 
 import projects from "../data/projects";
 import { GitHubIcon } from "../components/Icons";
@@ -12,10 +12,12 @@ function ProjectDetail() {
   if (!project) {
     return (
       <div className="flex min-h-screen flex-col items-center justify-center gap-4 px-6">
-        <h1 className="text-4xl font-bold text-white">Project Not Found</h1>
+        <h1 className="font-serif text-4xl font-medium text-text">
+          Project Not Found
+        </h1>
         <Link
           to="/"
-          className="flex items-center gap-2 text-blue-400 transition hover:text-blue-300"
+          className="flex items-center gap-2 text-primary transition hover:text-accent"
         >
           <ArrowLeft size={18} />
           Back to Home
@@ -25,22 +27,22 @@ function ProjectDetail() {
   }
 
   return (
-    <div className="min-h-screen bg-zinc-950 pt-24 pb-16">
+    <div className="min-h-screen pt-28 pb-20">
       <div className="mx-auto max-w-4xl px-6">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
           <Link
             to="/"
-            className="mb-8 inline-flex items-center gap-2 text-sm text-zinc-400 transition hover:text-white"
+            className="mb-10 inline-flex items-center gap-2 text-sm text-muted transition hover:text-text"
           >
             <ArrowLeft size={16} />
             Back to Home
           </Link>
 
-          <div className="mb-8 aspect-video overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/50">
+          <div className="mb-8 flex aspect-video items-center justify-center border border-border bg-card/40">
             {project.image ? (
               <img
                 src={project.image}
@@ -48,30 +50,30 @@ function ProjectDetail() {
                 className="h-full w-full object-cover"
               />
             ) : (
-              <div className="flex h-full items-center justify-center text-zinc-600">
-                <span className="text-6xl font-bold">{project.title[0]}</span>
-              </div>
+              <span className="font-serif text-6xl font-medium text-muted">
+                {project.title[0]}
+              </span>
             )}
           </div>
 
-          <h1 className="mb-4 text-4xl font-bold text-white">
+          <h1 className="mb-5 font-serif text-4xl font-medium text-text md:text-5xl">
             {project.title}
           </h1>
 
-          <p className="mb-8 max-w-2xl leading-relaxed text-zinc-400">
+          <p className="mb-10 max-w-2xl leading-relaxed text-muted">
             {project.description}
           </p>
 
           {project.tech && (
-            <div className="mb-8">
-              <h2 className="mb-3 text-lg font-semibold text-white">
+            <div className="mb-10">
+              <h2 className="mb-4 font-serif text-xl font-medium text-text">
                 Tech Stack
               </h2>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-x-4 gap-y-1.5">
                 {project.tech.map((t) => (
                   <span
                     key={t}
-                    className="rounded-lg bg-blue-500/10 px-3 py-1.5 text-sm font-medium text-blue-400"
+                    className="text-sm uppercase tracking-wider text-primary/80"
                   >
                     {t}
                   </span>
@@ -81,14 +83,14 @@ function ProjectDetail() {
           )}
 
           {project.features && (
-            <div className="mb-8">
-              <h2 className="mb-3 text-lg font-semibold text-white">
+            <div className="mb-10">
+              <h2 className="mb-4 font-serif text-xl font-medium text-text">
                 Features
               </h2>
-              <ul className="space-y-2">
+              <ul className="space-y-2.5">
                 {project.features.map((f) => (
-                  <li key={f} className="flex items-start gap-2 text-zinc-400">
-                    <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-blue-500" />
+                  <li key={f} className="flex items-start gap-3 text-muted">
+                    <span className="mt-1.5 h-px w-4 flex-shrink-0 bg-primary" />
                     {f}
                   </li>
                 ))}
@@ -96,13 +98,13 @@ function ProjectDetail() {
             </div>
           )}
 
-          <div className="flex gap-4">
+          <div className="flex flex-wrap gap-4">
             {project.github && (
               <a
                 href={project.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 rounded-xl border border-zinc-700 px-5 py-2.5 text-sm font-medium text-zinc-300 transition-colors hover:border-blue-500 hover:text-white"
+                className="flex items-center gap-2 rounded border border-border px-5 py-2.5 text-sm font-medium text-text transition-colors hover:border-text"
               >
                 <GitHubIcon size={18} />
                 GitHub
@@ -113,9 +115,9 @@ function ProjectDetail() {
                 href={project.demo}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 rounded-xl bg-blue-600 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-blue-700"
+                className="flex items-center gap-2 rounded border border-primary px-5 py-2.5 text-sm font-medium text-primary transition-colors hover:bg-primary hover:text-background"
               >
-                <ExternalLink size={18} />
+                <ArrowUpRight size={18} />
                 Live Demo
               </a>
             )}

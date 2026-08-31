@@ -37,14 +37,14 @@ function Navbar() {
     <header
       className={`fixed top-0 left-0 z-50 w-full border-b transition-colors duration-300 ${
         scrolled
-          ? "border-zinc-800/80 bg-zinc-950/80 backdrop-blur-xl"
+          ? "border-border/80 bg-background/85 backdrop-blur-md"
           : "border-transparent bg-transparent"
       }`}
     >
-      <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
-        <a href="/" className="text-2xl font-bold tracking-tight">
-          <span className="text-white">Seva</span>
-          <span className="text-blue-500">.</span>
+      <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
+        <a href="/" className="font-serif text-2xl font-medium tracking-wide">
+          <span className="text-text">Seva</span>
+          <span className="text-primary">.</span>
         </a>
 
         <ul className="hidden items-center gap-1 md:flex">
@@ -54,17 +54,15 @@ function Navbar() {
               <li key={link.name}>
                 <a
                   href={link.href}
-                  className={`relative rounded-lg px-4 py-2 text-sm transition-colors ${
-                    isActive
-                      ? "text-blue-400"
-                      : "text-zinc-400 hover:text-white"
+                  className={`relative rounded px-4 py-2 text-sm transition-colors ${
+                    isActive ? "text-primary" : "text-muted hover:text-text"
                   }`}
                 >
                   {link.name}
                   {isActive && (
                     <motion.span
                       layoutId="activeNav"
-                      className="absolute inset-0 rounded-lg bg-blue-500/10"
+                      className="absolute inset-x-4 bottom-0.5 h-px bg-primary"
                       transition={{ type: "spring", stiffness: 380, damping: 30 }}
                     />
                   )}
@@ -75,7 +73,7 @@ function Navbar() {
         </ul>
 
         <button
-          className="relative z-50 rounded-lg p-2 text-zinc-400 transition-colors hover:text-white md:hidden"
+          className="relative z-50 rounded p-2 text-muted transition-colors hover:text-text md:hidden"
           onClick={() => setIsOpen(!isOpen)}
           aria-label={isOpen ? "Close menu" : "Open menu"}
         >
@@ -90,7 +88,7 @@ function Navbar() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="overflow-hidden border-t border-zinc-800 bg-zinc-950/95 backdrop-blur-xl md:hidden"
+            className="overflow-hidden border-t border-border bg-background/95 backdrop-blur-md md:hidden"
           >
             <ul className="flex flex-col gap-1 p-4">
               {navLinks.map((link, i) => (
@@ -103,7 +101,7 @@ function Navbar() {
                   <a
                     href={link.href}
                     onClick={() => setIsOpen(false)}
-                    className="block rounded-lg px-4 py-3 text-zinc-300 transition-colors hover:bg-zinc-800/50 hover:text-blue-400"
+                    className="block rounded px-4 py-3 text-muted transition-colors hover:bg-card/50 hover:text-primary"
                   >
                     {link.name}
                   </a>

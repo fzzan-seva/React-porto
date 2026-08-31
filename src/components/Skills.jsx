@@ -3,88 +3,66 @@ import { motion } from "framer-motion";
 const categories = [
   {
     name: "Frontend",
-    skills: [
-      "JavaScript",
-      "HTML",
-      "CSS",
-      "Tailwind",
-    ],
+    skills: ["JavaScript", "HTML", "CSS", "Tailwind"],
   },
   {
     name: "Backend",
-    skills: [
-      "PHP",
-      "Node.js",
-      "Express",
-    ],
+    skills: ["PHP", "Node.js", "Express"],
   },
   {
     name: "Database",
-    skills: [
-      "MySQL",
-    ],
+    skills: ["MySQL"],
   },
   {
     name: "Tools",
-    skills: [
-      "Git",
-      "GitHub",
-      "VS Code",
-      "Figma",
-      "AI Prompting",
-    ],
+    skills: ["Git", "GitHub", "VS Code", "Figma", "AI Prompting"],
   },
   {
     name: "Framework",
-    skills: [
-      "Vue",
-      "React",
-      "Laravel",
-    ]
-  }
+    skills: ["Vue", "React", "Laravel"],
+  },
 ];
 
 function Skills() {
   return (
-    <section id="skills" className="relative py-28">
-      <div className="mx-auto max-w-7xl px-6">
+    <section id="skills" className="py-28">
+      <div className="mx-auto max-w-6xl px-6">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6 }}
         >
-          <p className="mb-3 text-sm font-medium uppercase tracking-wider text-blue-400">
+          <p className="mb-4 uppercase tracking-[0.25em] text-primary text-sm">
             Skills
           </p>
-          <h2 className="mb-12 text-4xl font-bold text-white md:text-5xl">
+          <h2 className="mb-14 font-serif text-4xl font-medium text-text md:text-5xl">
             My Skills
           </h2>
         </motion.div>
 
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
           {categories.map((cat, ci) => (
             <motion.div
               key={cat.name}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.5, delay: ci * 0.1 }}
-              className="rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6"
+              transition={{ duration: 0.5, delay: ci * 0.08 }}
             >
-              <h3 className="mb-4 text-lg font-semibold text-white">
+              <h3 className="mb-5 border-b border-border pb-3 text-sm font-medium uppercase tracking-wider text-text">
                 {cat.name}
               </h3>
-              <div className="flex flex-wrap gap-2">
+              <ul className="space-y-2">
                 {cat.skills.map((skill) => (
-                  <span
+                  <li
                     key={skill}
-                    className="rounded-lg border border-zinc-700 bg-zinc-800/50 px-3 py-1.5 text-sm text-zinc-300 transition-colors hover:border-blue-500/50 hover:text-blue-400"
+                    className="text-sm text-muted transition-colors hover:text-primary"
                   >
                     {skill}
-                  </span>
+                  </li>
                 ))}
-              </div>
+              </ul>
             </motion.div>
           ))}
         </div>
