@@ -2,12 +2,20 @@ import { motion } from "framer-motion";
 
 const categories = [
   {
-    name: "Frontend",
-    skills: ["JavaScript", "HTML", "CSS", "Tailwind"],
+    name: "Languages",
+    skills: ["JavaScript", "PHP", "HTML", "CSS"],
   },
   {
-    name: "Backend",
-    skills: ["PHP", "Node.js", "Express"],
+    name: "Frontend Frameworks",
+    skills: ["React", "Vue"],
+  },
+  {
+    name: "Backend Frameworks",
+    skills: ["Node.js", "Express", "Laravel"],
+  },
+  {
+    name: "CSS Frameworks",
+    skills: ["Tailwind"],
   },
   {
     name: "Database",
@@ -16,10 +24,6 @@ const categories = [
   {
     name: "Tools",
     skills: ["Git", "GitHub", "VS Code", "Figma", "AI Prompting"],
-  },
-  {
-    name: "Framework",
-    skills: ["Vue", "React", "Laravel"],
   },
 ];
 
