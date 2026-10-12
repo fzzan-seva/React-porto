@@ -1,33 +1,69 @@
 @import "tailwindcss";
 
 @theme {
-  --color-background: #171512;
-  --color-surface: #1f1c18;
-  --color-card: #26221d;
-  --color-primary: #c8a24a;
-  --color-accent: #e0c27c;
-  --color-text: #ece7dd;
-  --color-muted: #a49a8b;
-  --color-border: #38322a;
+  /* Palette — near-black charcoal with a single restrained violet accent */
+  --color-background: #0b0b0d;
+  --color-surface: #121216;
+  --color-card: #17171c;
+  --color-border: #26262d;
 
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-serif: "Cormorant Garamond", ui-serif, Georgia, serif;
+  --color-primary: #8b7cf6;
+  --color-accent: #c4b5fd;
+
+  --color-text: #f1f0ee;
+  --color-muted: #9c9ca6;
+
+  /* Typography */
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    sans-serif;
+  --font-display: "Space Grotesk", "Inter", ui-sans-serif, system-ui,
+    sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
   margin: 0;
-  background: var(--color-background);
+  min-height: 100dvh;
+  background-color: var(--color-background);
   color: var(--color-text);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Restrained ambient background — two soft light sources, no heavy gradient */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      55rem 38rem at 12% -12%,
+      color-mix(in oklab, var(--color-primary) 13%, transparent),
+      transparent 60%
+    ),
+    radial-gradient(
+      46rem 34rem at 100% 0%,
+      color-mix(in oklab, var(--color-accent) 9%, transparent),
+      transparent 55%
+    );
 }
 
 * {
   box-sizing: border-box;
+}
+
+/* Keep anchored sections clear of the fixed navbar */
+:where(section[id], div[id], h2[id]) {
+  scroll-margin-top: 5.5rem;
 }
 
 ::selection {
@@ -35,8 +71,15 @@ body {
   color: var(--color-background);
 }
 
+:where(a, button, input, textarea, select, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
 ::-webkit-scrollbar {
   width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -45,9 +88,32 @@ body {
 
 ::-webkit-scrollbar-thumb {
   background: var(--color-border);
-  border-radius: 4px;
+  border-radius: 999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-muted);
+}
+
+/* Fine grid backdrop used sparingly behind hero and project covers */
+@utility bg-grid {
+  background-image:
+    linear-gradient(to right, var(--color-border) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--color-border) 1px, transparent 1px);
+  background-size: 3.5rem 3.5rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

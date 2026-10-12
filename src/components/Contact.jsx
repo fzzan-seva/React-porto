@@ -1,136 +1,207 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { MessageCircle } from "lucide-react";
+import { ArrowUpRight, MessageCircle } from "lucide-react";
 
+import SectionHeading from "./SectionHeading";
 import { GitHubIcon, InstagramIcon } from "./Icons";
 
+const WHATSAPP_NUMBER = "6289526772479";
+
+const channels = [
+  {
+    Icon: MessageCircle,
+    label: "WhatsApp",
+    display: "+62 895-2677-2479",
+    href: `https://wa.me/${WHATSAPP_NUMBER}`,
+  },
+  {
+    Icon: GitHubIcon,
+    label: "GitHub",
+    display: "github.com/fzzan-seva",
+    href: "https://github.com/fzzan-seva",
+  },
+  {
+    Icon: InstagramIcon,
+    label: "Instagram",
+    display: "@sevachronicle",
+    href: "https://instagram.com/sevachronicle",
+  },
+];
+
 function Contact() {
-  const [formData, setFormData] = useState({
-    name: "",
-    message: "",
-  });
+  const [formData, setFormData] = useState({ name: "", message: "" });
+  const [errors, setErrors] = useState({});
+  const [status, setStatus] = useState("");
+  const nameRef = useRef(null);
+  const messageRef = useRef(null);
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+    setErrors((prev) => {
+      if (!prev[name]) return prev;
+      const next = { ...prev };
+      delete next[name];
+      return next;
+    });
+  };
+
+  const validate = () => {
+    const next = {};
+    if (!formData.name.trim()) next.name = "Mohon isi nama Anda.";
+    if (formData.message.trim().length < 10)
+      next.message = "Mohon isi pesan minimal 10 karakter.";
+    return next;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { name, message } = formData;
-    const waNumber = "6289526772479";
-    const text = encodeURIComponent(`Halo, saya ${name}.\n\n${message}`);
-    window.open(`https://wa.me/${waNumber}?text=${text}`, "_blank");
-    setFormData({ name: "", message: "" });
+    const nextErrors = validate();
+    if (Object.keys(nextErrors).length) {
+      setErrors(nextErrors);
+      setStatus("");
+      if (nextErrors.name) nameRef.current?.focus();
+      else messageRef.current?.focus();
+      return;
+    }
+
+    const text = encodeURIComponent(
+      `Halo, saya ${formData.name.trim()}.\n\n${formData.message.trim()}`
+    );
+    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${text}`;
+    const opened = window.open(url, "_blank", "noopener,noreferrer");
+
+    setStatus(
+      opened
+        ? "WhatsApp dibuka di tab baru. Tekan tombol kirim di WhatsApp untuk mengirim pesan Anda."
+        : "Popup diblokir browser. Izinkan popup atau hubungi langsung lewat WhatsApp."
+    );
+    if (opened) setFormData({ name: "", message: "" });
   };
 
-  const socials = [
-    {
-      icon: MessageCircle,
-      label: "WhatsApp",
-      href: "https://wa.me/6289526772479",
-      display: "+62 895-2677-2479",
-    },
-    {
-      icon: GitHubIcon,
-      label: "GitHub",
-      href: "https://github.com/fzzan-seva",
-      display: "github.com/fzzan-seva",
-    },
-    {
-      icon: InstagramIcon,
-      label: "Instagram",
-      href: "https://instagram.com/sevachronicle",
-      display: "@sevachronicle",
-    },
-  ];
+  const inputError = (field) =>
+    errors[field]
+      ? { "aria-invalid": true, "aria-describedby": `${field}-error` }
+      : {};
 
   return (
-    <section id="contact" className="py-28">
+    <section id="contact" className="border-t border-border/60 py-24 md:py-28">
       <div className="mx-auto max-w-6xl px-6">
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
         >
-          <p className="mb-4 uppercase tracking-[0.25em] text-primary text-sm">
-            Contact
-          </p>
-          <h2 className="mb-14 font-serif text-4xl font-medium text-text md:text-5xl">
-            Get In Touch
-          </h2>
+          <SectionHeading
+            eyebrow="Kontak"
+            title="Mari bekerja sama"
+            description="Saya terbuka untuk PKL (magang), kolaborasi, maupun proyek freelance. Kirim pesan melalui formulir di samping — pesan akan diteruskan ke WhatsApp saya."
+          />
         </motion.div>
 
-        <div className="grid gap-16 md:grid-cols-2">
+        <div className="mt-12 grid gap-12 md:grid-cols-2 md:gap-16">
           <motion.form
+            noValidate
             onSubmit={handleSubmit}
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.6, delay: 0.1 }}
+            transition={{ duration: 0.5, delay: 0.05, ease: "easeOut" }}
             className="space-y-6"
           >
             <div>
               <label htmlFor="name" className="mb-1.5 block text-sm text-muted">
-                Name
+                Nama
               </label>
               <input
+                ref={nameRef}
                 id="name"
                 name="name"
                 type="text"
-                required
+                autoComplete="name"
                 value={formData.name}
                 onChange={handleChange}
-                className="w-full border-b border-border bg-transparent px-2 py-3 text-text placeholder-muted/60 outline-none transition-colors focus:border-primary"
-                placeholder="Your name"
+                placeholder="Nama Anda"
+                className="w-full rounded-lg border border-border bg-surface/60 px-3.5 py-3 text-text placeholder:text-muted/60 transition-colors focus:border-primary/70"
+                {...inputError("name")}
               />
+              {errors.name && (
+                <p id="name-error" className="mt-2 text-xs text-red-400">
+                  {errors.name}
+                </p>
+              )}
             </div>
+
             <div>
-              <label htmlFor="message" className="mb-1.5 block text-sm text-muted">
-                Message
+              <label
+                htmlFor="message"
+                className="mb-1.5 block text-sm text-muted"
+              >
+                Pesan
               </label>
               <textarea
+                ref={messageRef}
                 id="message"
                 name="message"
-                required
                 rows={5}
                 value={formData.message}
                 onChange={handleChange}
-                className="w-full resize-none border-b border-border bg-transparent px-2 py-3 text-text placeholder-muted/60 outline-none transition-colors focus:border-primary"
-                placeholder="Your message..."
+                placeholder="Ceritakan kebutuhan atau proyek Anda…"
+                className="w-full resize-none rounded-lg border border-border bg-surface/60 px-3.5 py-3 text-text placeholder:text-muted/60 transition-colors focus:border-primary/70"
+                {...inputError("message")}
               />
+              {errors.message && (
+                <p id="message-error" className="mt-2 text-xs text-red-400">
+                  {errors.message}
+                </p>
+              )}
             </div>
+
             <button
               type="submit"
-              className="flex items-center gap-2 rounded border border-primary px-6 py-2.5 text-sm font-medium text-primary transition-colors hover:bg-primary hover:text-background"
+              className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-medium text-background transition-colors hover:bg-accent"
             >
-              Send Message
+              Kirim lewat WhatsApp
+              <ArrowUpRight size={16} aria-hidden="true" />
             </button>
+
+            <p aria-live="polite" className="min-h-5 text-xs text-muted">
+              {status}
+            </p>
           </motion.form>
 
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="flex flex-col justify-center gap-6"
+            transition={{ duration: 0.5, delay: 0.1, ease: "easeOut" }}
+            className="flex flex-col gap-4"
           >
-            {socials.map((s) => (
+            {channels.map((channel) => (
               <a
-                key={s.label}
-                href={s.href}
+                key={channel.label}
+                href={channel.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex items-center gap-4 border-b border-border pb-4 transition-colors hover:border-primary/60"
+                className="group flex items-center gap-4 rounded-xl border border-border bg-surface/40 px-5 py-4 transition-colors hover:border-primary/50"
               >
-                <s.icon
-                  size={20}
-                  className="text-muted transition-colors group-hover:text-primary"
+                <span className="flex h-10 w-10 flex-none items-center justify-center rounded-lg border border-border bg-card text-muted transition-colors group-hover:text-primary">
+                  <channel.Icon size={20} />
+                </span>
+                <span className="min-w-0">
+                  <span className="block text-sm font-medium text-text">
+                    {channel.label}
+                  </span>
+                  <span className="block truncate text-sm text-muted">
+                    {channel.display}
+                  </span>
+                </span>
+                <ArrowUpRight
+                  size={16}
+                  aria-hidden="true"
+                  className="ml-auto flex-none text-muted transition-colors group-hover:text-primary"
                 />
-                <div>
-                  <p className="text-sm font-medium text-text">{s.label}</p>
-                  <p className="text-sm text-muted">{s.display}</p>
-                </div>
               </a>
             ))}
           </motion.div>

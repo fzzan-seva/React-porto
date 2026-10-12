@@ -1,69 +1,77 @@
 import { motion } from "framer-motion";
-import { Code2, Cpu, Rocket } from "lucide-react";
 
-const stats = [
-  { icon: Code2, label: "Projects", value: "5+" },
-  { icon: Cpu, label: "Technologies", value: "10+" },
-  { icon: Rocket, label: "Learning", value: "Ongoing" },
+import SectionHeading from "./SectionHeading";
+
+const facts = [
+  { label: "Pendidikan", value: "Kelas 12 PPLG — SMK Yadika Soreang" },
+  { label: "Fokus", value: "Frontend & backend web" },
+  { label: "Stack utama", value: "React · Node.js · Laravel" },
+  { label: "Status", value: "Terbuka untuk PKL / magang" },
 ];
 
 function About() {
   return (
-    <section id="about" className="py-28">
+    <section id="about" className="border-t border-border/60 py-24 md:py-28">
       <div className="mx-auto max-w-6xl px-6">
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
         >
-          <p className="mb-4 uppercase tracking-[0.25em] text-primary text-sm">
-            About Me
-          </p>
-          <h2 className="mb-12 font-serif text-4xl font-medium text-text md:text-5xl">
-            About Me
-          </h2>
+          <SectionHeading
+            eyebrow="Tentang"
+            title="Belajar dengan membangun aplikasi nyata"
+          />
         </motion.div>
 
-        <div className="grid gap-16 md:grid-cols-2">
+        <div className="mt-12 grid gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="space-y-5 leading-relaxed text-muted"
+            transition={{ duration: 0.5, delay: 0.05, ease: "easeOut" }}
+            className="space-y-5 leading-relaxed text-muted text-pretty"
           >
             <p>
-              Saya Seorang Siswa kelas 12 SMK Yadika Soreang Jurusan PPLG.
-              Saya mempelajari membuat Website menggunakan Vue, React, dan Laravel.
+              Saya Fauzan Seva Nugraha, siswa kelas 12 jurusan PPLG
+              (Pengembangan Perangkat Lunak dan Gim) di SMK Yadika Soreang.
+              Saya tertarik pada pengembangan web, baik di sisi frontend
+              maupun backend.
             </p>
             <p>
-              Perjalanan saya dimulai dari ketertarikan terhadap web
-              development, dan terus berkembang hingga mempelajari
-              berbagai framework dan tools seperti React, Laravel,
-              Node.js, dan masih banyak lagi. Setiap project adalah
-              kesempatan untuk belajar dan berkembang.
+              Saya belajar dengan membangun aplikasi, bukan hanya dari teori.
+              Beberapa proyek yang saya kerjakan mencakup sistem kasir,
+              toko online, dan manajemen perpustakaan — menggunakan React,
+              Vue, Laravel, Node.js, Express, dan MySQL. Dari proyek-proyek
+              tersebut saya berlatih menyusun antarmuka, membangun API,
+              merancang basis data, serta membaca dan memperbaiki kode yang
+              sudah ada.
+            </p>
+            <p>
+              Saya terbuka pada masukan, senang memecahkan masalah, dan
+              berusaha menulis kode yang rapi serta mudah dirawat. Tujuan saya
+              berikutnya adalah tumbuh melalui program PKL (magang) dan
+              proyek nyata bersama tim.
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-3 md:grid-cols-1 lg:grid-cols-3">
-            {stats.map((stat, i) => (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-80px" }}
-                transition={{ duration: 0.5, delay: 0.1 + i * 0.1 }}
-                className="flex flex-col items-center gap-2 border-t border-border py-6 text-center"
-              >
-                <stat.icon className="text-primary" size={20} strokeWidth={1.5} />
-                <p className="font-serif text-3xl font-medium text-text">
-                  {stat.value}
-                </p>
-                <p className="text-sm text-muted">{stat.label}</p>
-              </motion.div>
+          <motion.dl
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.5, delay: 0.1, ease: "easeOut" }}
+            className="grid gap-px overflow-hidden rounded-xl border border-border bg-border"
+          >
+            {facts.map((fact) => (
+              <div key={fact.label} className="bg-surface px-5 py-5">
+                <dt className="font-mono text-xs uppercase tracking-[0.2em] text-primary">
+                  {fact.label}
+                </dt>
+                <dd className="mt-2 text-sm text-text">{fact.value}</dd>
+              </div>
             ))}
-          </div>
+          </motion.dl>
         </div>
       </div>
     </section>

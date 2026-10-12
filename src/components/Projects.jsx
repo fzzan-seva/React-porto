@@ -1,79 +1,95 @@
 import { motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
 import projects from "../data/projects";
+import SectionHeading from "./SectionHeading";
+import ProjectCover from "./ProjectCover";
 
 function Projects() {
   return (
-    <section id="projects" className="py-28">
+    <section id="projects" className="border-t border-border/60 py-24 md:py-28">
       <div className="mx-auto max-w-6xl px-6">
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
         >
-          <p className="mb-4 uppercase tracking-[0.25em] text-primary text-sm">
-            Projects
-          </p>
-          <h2 className="mb-14 font-serif text-4xl font-medium text-text md:text-5xl">
-            My Projects
-          </h2>
+          <SectionHeading
+            eyebrow="Proyek"
+            title="Proyek pilihan"
+            description="Beberapa proyek yang saya kerjakan, lengkap dengan teknologi, fitur, dan tautan kode sumbernya."
+          />
         </motion.div>
 
-        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
-          {projects.map((project, i) => (
-            <motion.div
+        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {projects.map((project, index) => (
+            <motion.article
               key={project.id}
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.5, delay: i * 0.08 }}
-              className="group flex flex-col border border-border p-6 transition-colors hover:border-primary/60"
+              transition={{ duration: 0.45, delay: index * 0.07, ease: "easeOut" }}
+              className="group flex flex-col overflow-hidden rounded-xl border border-border bg-surface/40 transition-colors duration-300 hover:border-primary/50"
             >
-              <div className="mb-6 flex aspect-video items-center justify-center bg-card/40">
-                {project.image ? (
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    loading="lazy"
-                    className="h-full w-full object-cover"
-                  />
-                ) : (
-                  <span className="font-serif text-4xl font-medium text-muted">
-                    {project.title[0]}
-                  </span>
-                )}
+              <ProjectCover
+                monogram={project.monogram}
+                category={project.category}
+                className="aspect-[16/10] border-b border-border"
+              />
+
+              <div className="flex flex-1 flex-col p-6">
+                <h3 className="font-display text-xl font-semibold tracking-tight text-text">
+                  {project.title}
+                </h3>
+
+                <p className="mt-3 flex-1 text-sm leading-relaxed text-muted text-pretty">
+                  {project.summary}
+                </p>
+
+                <ul className="mt-5 flex flex-wrap gap-2">
+                  {project.tech.map((tech) => (
+                    <li
+                      key={tech}
+                      className="rounded-md border border-border bg-card/60 px-2 py-0.5 font-mono text-[0.7rem] text-muted"
+                    >
+                      {tech}
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="mt-6 flex items-center justify-between gap-4 border-t border-border pt-4">
+                  <Link
+                    to={`/project/${project.id}`}
+                    className="inline-flex items-center gap-1.5 text-sm font-medium text-text transition-colors hover:text-primary"
+                  >
+                    Studi kasus
+                    <ArrowRight
+                      size={15}
+                      aria-hidden="true"
+                      className="transition-transform group-hover:translate-x-0.5"
+                    />
+                  </Link>
+
+                  <div className="flex items-center gap-3">
+                    {project.links.map((link) => (
+                      <a
+                        key={link.href}
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-xs text-muted transition-colors hover:text-primary"
+                        aria-label={`${project.title} — ${link.label}`}
+                      >
+                        {link.short}
+                        <ArrowUpRight size={13} aria-hidden="true" />
+                      </a>
+                    ))}
+                  </div>
+                </div>
               </div>
-
-              <h3 className="mb-3 font-serif text-2xl font-medium text-text transition-colors group-hover:text-primary">
-                {project.title}
-              </h3>
-
-              <p className="mb-6 flex-1 text-sm leading-relaxed text-muted">
-                {project.description}
-              </p>
-
-              <div className="mb-6 flex flex-wrap gap-x-3 gap-y-1.5">
-                {project.tech.map((t) => (
-                  <span key={t} className="text-xs uppercase tracking-wider text-primary/80">
-                    {t}
-                  </span>
-                ))}
-              </div>
-
-              <Link
-                to={`/project/${project.id}`}
-                className="inline-flex items-center gap-1.5 border-t border-border pt-4 text-sm text-text transition-colors hover:text-primary"
-              >
-                View Project
-                <ArrowUpRight
-                  size={16}
-                  className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                />
-              </Link>
-            </motion.div>
+            </motion.article>
           ))}
         </div>
       </div>
