@@ -6,7 +6,7 @@
  * - "POS System" is a collaborative/school team project. Its frontend and
  *   backend repositories are owned by a teammate (@farhanline), so it is
  *   presented as a team project, not as sole work.
- * - "FQueensha E-Commerce" and "Web Perpustakaan Digital" are personal repos.
+ * - "Template E-Commerce – Elegant Black & Gold" and "Web Perpustakaan Digital" are personal repos.
  * - No project currently has a verified live demo URL, so `demo` is omitted
  *   unless a real deployment exists.
  *
@@ -55,28 +55,33 @@ const projects = [
   },
   {
     id: 2,
-    title: "FQueensha E-Commerce",
+    title: "Template E-Commerce – Elegant Black & Gold",
     category: "E-Commerce",
-    monogram: "FQ",
+    monogram: "EG",
     summary:
-      "Toko online untuk brand fashion gamis FQueensha, dibangun dengan Laravel dan Blade lengkap dengan panel admin.",
+      "Template e-commerce premium bertema hitam dan emas, siap pakai dan siap dijual sebagai produk digital.",
     overview:
-      "FQueensha E-Commerce adalah aplikasi toko online berbasis Laravel. Aplikasi ini mencakup katalog produk beserta kategori dan pencarian, varian ukuran/warna dengan stok per varian, keranjang belanja, checkout dengan buku alamat, alur pembayaran manual (verifikasi bukti transfer oleh admin), riwayat pesanan, serta panel admin untuk mengelola produk, kategori, pesanan, pengguna, dan pengaturan toko.",
+      "Template E-Commerce – Elegant Black & Gold adalah template toko online berbasis Laravel dengan desain elegan dan premium bertema hitam & emas. Cocok digunakan untuk berbagai brand fashion, gamis, hijab, aksesoris, maupun produk premium lainnya. Sudah dilengkapi dengan katalog produk, varian ukuran/warna, keranjang belanja, checkout, pembayaran manual, riwayat pesanan, serta panel admin siap pakai.",
     problem:
-      "Menyediakan kanal penjualan online untuk brand gamis, lengkap dengan pengelolaan pesanan dan verifikasi pembayaran manual.",
-    role: "Proyek pribadi. Berfokus pada kustomisasi storefront dan panel admin untuk kebutuhan brand FQueensha.",
+      "Menyediakan template e-commerce siap pakai bertema hitam dan emas untuk mempercepat pembuatan toko online atau bisa dijadikan produk digital siap jual.",
+    role: "Proyek pribadi. Berfokus pada desain UI/UX bertema hitam & emas, struktur kode yang rapi, serta kemudahan rebranding agar template ini benar-benar siap pakai.",
     tech: ["Laravel", "PHP", "Blade", "MySQL"],
     features: [
+      "Desain premium dan elegan dengan tema Hitam & Emas",
+      "Siap pakai & mudah di-rebrand",
       "Katalog produk dengan kategori, pencarian, dan filter",
       "Varian ukuran/warna dengan stok per varian",
       "Keranjang belanja, buku alamat, dan checkout",
       "Pembayaran manual: unggah bukti transfer & verifikasi admin",
       "Riwayat pesanan dengan pelacakan status",
       "Panel admin: produk, kategori, pesanan, pengguna, dan pengaturan toko",
+      "Kode terstruktur rapi, mudah dikustomisasi",
     ],
     decisions: [
-      "Menggunakan alur pembayaran manual (transfer + unggah bukti) agar cocok untuk operasional skala kecil tanpa payment gateway.",
-      "Identitas toko (nama, kontak, rekening) dapat diatur dari panel admin sehingga mudah disesuaikan.",
+      "Menggunakan konsep Black & Gold untuk menciptakan kesan premium dan eksklusif.",
+      "Dirancang sebagai template siap pakai agar bisa langsung digunakan atau dijual kembali sebagai produk digital.",
+      "Menggunakan alur pembayaran manual (transfer + unggah bukti) agar bisa dipakai tanpa bergantung pada payment gateway.",
+      "Semua data toko (nama, logo, kontak, rekening) bisa diatur melalui panel admin untuk mempermudah rebranding.",
     ],
     links: [
       {
