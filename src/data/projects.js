@@ -59,29 +59,29 @@ const projects = [
     category: "E-Commerce",
     monogram: "EG",
     summary:
-      "Template e-commerce premium bertema hitam dan emas, siap pakai dan siap dijual sebagai produk digital.",
+      "Template e-commerce premium bertema hitam dan emas, siap pakai dan bisa langsung dijual sebagai produk digital.",
     overview:
-      "Template E-Commerce – Elegant Black & Gold adalah template toko online berbasis Laravel dengan desain elegan dan premium bertema hitam & emas. Cocok digunakan untuk berbagai brand fashion, gamis, hijab, aksesoris, maupun produk premium lainnya. Sudah dilengkapi dengan katalog produk, varian ukuran/warna, keranjang belanja, checkout, pembayaran manual, riwayat pesanan, serta panel admin siap pakai.",
+      "Template E-Commerce – Elegant Black & Gold adalah template toko online berbasis Laravel dengan desain elegan, premium, dan bertema hitam & emas. Cocok buat berbagai brand fashion, gamis, hijab, aksesoris, atau produk premium lainnya. Sudah lengkap dengan katalog produk, varian ukuran/warna, keranjang belanja, checkout, pembayaran manual, riwayat pesanan, dan panel admin siap pakai.",
     problem:
-      "Menyediakan template e-commerce siap pakai bertema hitam dan emas untuk mempercepat pembuatan toko online atau bisa dijadikan produk digital siap jual.",
-    role: "Proyek pribadi. Berfokus pada desain UI/UX bertema hitam & emas, struktur kode yang rapi, serta kemudahan rebranding agar template ini benar-benar siap pakai.",
+      "Menyediakan template e-commerce siap pakai bertema hitam dan emas untuk mempercepat bikin toko online, atau bisa dijadikan produk digital siap jual.",
+    role: "Proyek pribadi. Fokus pada desain UI/UX bertema hitam & emas, struktur kode yang rapi, dan kemudahan rebranding biar template ini makin gampang dipakai.",
     tech: ["Laravel", "PHP", "Blade", "MySQL"],
     features: [
-      "Desain premium dan elegan dengan tema Hitam & Emas",
-      "Siap pakai & mudah di-rebrand",
+      "Desain premium dan elegan dengan tema hitam & emas",
+      "Siap pakai dan mudah di-rebrand",
       "Katalog produk dengan kategori, pencarian, dan filter",
       "Varian ukuran/warna dengan stok per varian",
       "Keranjang belanja, buku alamat, dan checkout",
-      "Pembayaran manual: unggah bukti transfer & verifikasi admin",
+      "Pembayaran manual: bisa unggah bukti transfer dan diverifikasi oleh admin",
       "Riwayat pesanan dengan pelacakan status",
       "Panel admin: produk, kategori, pesanan, pengguna, dan pengaturan toko",
-      "Kode terstruktur rapi, mudah dikustomisasi",
+      "Kode terstruktur rapi dan mudah dikustomisasi",
     ],
     decisions: [
-      "Menggunakan konsep Black & Gold untuk menciptakan kesan premium dan eksklusif.",
-      "Dirancang sebagai template siap pakai agar bisa langsung digunakan atau dijual kembali sebagai produk digital.",
-      "Menggunakan alur pembayaran manual (transfer + unggah bukti) agar bisa dipakai tanpa bergantung pada payment gateway.",
-      "Semua data toko (nama, logo, kontak, rekening) bisa diatur melalui panel admin untuk mempermudah rebranding.",
+      "Menggunakan konsep hitam dan emas untuk menciptakan kesan premium dan eksklusif.",
+      "Dirancang sebagai template siap pakai, bisa langsung dipakai atau dijual kembali sebagai produk digital.",
+      "Menggunakan alur pembayaran manual (transfer + unggah bukti) biar bisa dipakai tanpa bergantung pada payment gateway.",
+      "Semua data toko (nama, logo, kontak, rekening) bisa diatur lewat panel admin untuk mempermudah rebranding.",
     ],
     links: [
       {
